@@ -8,46 +8,42 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-You have to install ngrok, check your permission on GitHub (only owners can add a webhook),
+Download ngrok, check your permission on GitHub (only owners can add a webhook).
 
-You can download Logstash, Kibana and ElasticSearch to test you analytics locally or you can try Docker and Docker Compose.
+Download Logstash, Kibana and ElasticSearch to test you analytics locally or you can try Docker and Docker Compose.
 
 ### Installing
 
-On ngrok, you have to give your _localhost_ address and copy you public ip (which should be something like _https://idgiventoyou.ngrok.io_) on GitHub Webhook menu.
+On ngrok, you have to write _http://localhost:2727_ and copy the public IP ngrok gave to you (something like _https://idgiventoyou.ngrok.io_) on GitHub Webhook menu.
 
-On GitHub project, go to Settings, Webhook, click on "Add Webhook" and paste your **ngrok address**.
+On GitHub project, go to Settings > Webhook > click on "Add Webhook" and paste your **ngrok address**.
 
-With:
-* Docker -
-* Logstash/Kibana/ElasticSearch -
+After that:
+* With Docker - After inital setup of Docker and Docker Compose, open the project with it. Give command _docker-compose up_ from _compose_ directory.
+* With Logstash/Kibana/ElasticSearch - Add the pipeline _compose/logstash/pipeline/github.conf_ inside logstash and start all the services. Then open the "Dev Tools" menu of Kibana and paste the content of _/elastic_setup.txt_ and execute all the queries.
 
 ## Running the tests
 
-The tests are located in /test directory and are written in Python through UnitTest. They are used to create new issues, add comments and add labels.
+The tests are located in /test directory and are written in Python through UnitTest: actually they are used to test issue events.
 
-The contributors can add other tests opening the source
+Contributors can add other tests by opening tests/conf directory, opening _settings.py_ file and filling the "GITHUB" dictionary with your GitHub informations.
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+```
+GITHUB = {
+    'user': '<user_name>',
+    'passwd': '<password>',
+    'repo': '<owner>/<repo_name>'
+}
+ ```
 
 ## Built With
 
 * [Elastic Search](https://www.elastic.co/products/elasticsearch) - Analytics engine
 * [Kibana](https://www.elastic.co/products/kibana) - Analytics Dashboard
 * [LogStash](https://www.elastic.co/products/logstash) - Processing pipeline
-* [ngrok](https://ngrok.com/) - Local server on public ip over tunnels
+* [ngrok](https://ngrok.com/) - Local server on public IP over tunnels
 Opt:
-* [Docker](https://www.docker.com/) -
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+* [Docker](https://www.docker.com/) - Software container platform
 
 ## Authors
 
